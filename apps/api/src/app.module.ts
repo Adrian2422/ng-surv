@@ -22,6 +22,9 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
+import { SurveysModule } from './surveys/surveys.module';
+import { QuestionsModule } from './questions/questions.module';
+import { ResponsesModule } from './responses/responses.module';
 
 @Catch(HttpException)
 class HttpExceptionFilter extends BaseExceptionFilter {
@@ -41,7 +44,14 @@ class HttpExceptionFilter extends BaseExceptionFilter {
 }
 
 @Module({
-  imports: [EventEmitterModule.forRoot(), CqrsModule.forRoot(), PrismaModule],
+  imports: [
+    EventEmitterModule.forRoot(),
+    CqrsModule.forRoot(),
+    PrismaModule,
+    SurveysModule,
+    QuestionsModule,
+    ResponsesModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
