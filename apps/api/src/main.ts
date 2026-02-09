@@ -1,3 +1,4 @@
+import { cleanupOpenApiDoc } from 'nestjs-zod';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -21,7 +22,7 @@ async function bootstrap() {
       .build(),
   );
 
-  SwaggerModule.setup('api/swagger', app, openApiDoc, {
+  SwaggerModule.setup('api/swagger', app, cleanupOpenApiDoc(openApiDoc), {
     jsonDocumentUrl: '/api/swagger.json',
   });
   await app.listen(port);
